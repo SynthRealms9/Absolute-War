@@ -211,3 +211,44 @@ if st.button("End Turn"):
     st.session_state.gold += 20
     st.session_state.food += 10
     st.session_state.turn += 1
+st.subheader("🗺️ Map Overview")
+
+cols = st.columns(3)  # One column per region
+
+for i, (name, region) in enumerate(st.session_state.regions.items()):
+    with cols[i]:
+        st.markdown(f"### {name}")
+        owner_color = "🟩" if region["owner"] == "Player" else "🟥"
+        st.markdown(f"{owner_color} **Owner:** {region['owner']}")
+        st.markdown(f"🪖 Infantry: {region['infantry']}")
+        st.markdown(f"🏇 Cavalry: {region['cavalry']}")
+        st.markdown(f"🏹 Archers: {region['archers']}")
+st.sidebar.title("📋 Command Center")
+st.sidebar.markdown("---")
+st.sidebar.markdown(f"**🧭 Turn:** {st.session_state.turn}")
+st.sidebar.markdown(f"💰 **Gold:** {st.session_state.gold}")
+st.sidebar.markdown(f"🍞 **Food:** {st.session_state.food}")
+st.sidebar.markdown("---")
+if st.sidebar.button("🪖 Recruit Infantry (5💰, 3🍞)"):
+    # logic here...
+
+if st.sidebar.button("🏇 Recruit Cavalry (10💰, 5🍞)"):
+    # logic here...
+
+if st.sidebar.button("🏹 Recruit Archers (7💰, 4🍞)"):
+    # logic here...
+st.markdown("## ⚔️ Attack a Region")
+enemy_to_attack = st.selectbox("🎯 Choose a region to attack:", ["Carthage", "Gaul"])
+if st.button("🔥 Launch Attack"):
+    # battle logic...
+st.markdown(
+    f"""
+    <div style='background-color:#f9f9f9;padding:10px;border-radius:10px'>
+        <strong>Rome</strong><br>
+        🟩 Owner: Player<br>
+        🪖 Infantry: 10<br>
+        🏇 Cavalry: 5<br>
+        🏹 Archers: 4
+    </div>
+    """, unsafe_allow_html=True
+)
